@@ -1,23 +1,24 @@
-class Dog {
+class Animal {
+  private name: string;
 
-  constructor(readonly name: string) {
-  
+  constructor(name: string) {
+    this.name = name;
   }
 
-  sayHello(): string {
-    return 'Dog says hello!';
+  getName(): string {
+    return this.name;
   }
-
 }
 
-class Fish {
-
-  constructor(readonly name: string) {
-
+class Dog extends Animal {
+  sayHello(): string {
+    return `${this.getName()} says hello!`;
   }
+}
 
+class Fish extends Animal {
   dive(howDeep: number): string {
-    return `Diving ${howDeep} feet.`;
+    return `${this.getName()} dives ${howDeep} feet.`;
   }
 }
 
@@ -28,8 +29,8 @@ function talkToPet(pet: Pet): string | undefined {
     return pet.sayHello();
   }
   else if (pet instanceof Fish) {
-    const random = Math.floor(100 * Math.random());
-    return 'Fish cannot talk, sorry. '.concat(pet.dive(random));
+    const random: number = Math.floor(100 * Math.random());
+    return `${pet.getName()} cannot talk, sorry. `.concat(pet.dive(random));
   }
 }
 
@@ -38,5 +39,3 @@ const myFish = new Fish('Goldie');
 
 console.log(talkToPet(myDog));
 console.log(talkToPet(myFish));
-
-
